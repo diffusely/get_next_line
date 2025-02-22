@@ -6,93 +6,57 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 21:15:43 by noavetis          #+#    #+#             */
-/*   Updated: 2025/02/13 16:59:21 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/02/23 01:05:51 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-char	*ft_strjoin(const char *s1, const char *s2)
+char	*ft_strjoin(char *s1, const char *s2, int flag, int join)
 {
 	char	*str;
 	size_t	size;
 	size_t	i;
-
-	size = ft_strlen(s1) + ft_strlen(s2);
+	
+	size = 0;
+	if (join && s1 && s2)
+		size = strlen_check(s1, 0) + strlen_check(s2, flag);
+	else if (s2)
+		size = strlen_check(s2, flag);
 	str = malloc((size + 1) * sizeof(char));
-	if (!str || !s1 || !s2)
-		return (NULL);
+	if (!str)
+		return (free(s1), NULL);
 	i = 0;
-	while (*s1)
+	while (join && s1 && s1[i] && i < size)
 	{
-		str[i] = *(s1++);
+		str[i] = s1[i];
 		i++;
 	}
-	while (*s2)
+	while (s2 && *s2 && i < size)
+		str[i++] = *(s2++);
+	if (i == 0)
 	{
-		str[i] = *(s2++);
-		i++;
+		free(str);
+		return (free(s1), NULL);
 	}
 	str[i] = '\0';
-	return (str);
+	return (free(s1), str);
 }
 
-char	*ft_strdup(const char *src)
+size_t	strlen_check(const char *buffer, int flag)
 {
-	char	*ptr;
-	int		size;
-	int		i;
+	size_t	i;
 
 	i = 0;
-	size = ft_strlen(src);
-	ptr = (char *)malloc(size + 1);
-	if (!ptr)
+	if (!buffer)
 		return (0);
-	while (i < size + 1)
-	{
-		ptr[i] = src[i];
-		i++;
-	}
-	return (ptr);
-}
-
-char	*ft_alloc_end(const char *src ,int size)
-{
-	char	*ptr;
-	int		i;
-
-	i = 0;
-	ptr = (char *)malloc(size + 1);
-	if (!ptr)
-		return (0);
-	while (i < size + 1)
-	{
-		ptr[i] = src[i];
-		i++;
-	}
-	return (ptr);
-}
-
-int	get_next_line_utils(char buffer[BUFFER_SIZE + 1])
-{
-	int	i;
-
-	i = 0;
 	while (buffer[i])
 	{
-		if (buffer[i] == '\n')
-			return (i);
+		if (flag && buffer[i] == '\n')
+			return (i + 1);
 		i++;
 	}
-	return (0);
+	if (flag)
+		return (i + 1);
+	return (i);
 }

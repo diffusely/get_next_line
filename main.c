@@ -14,7 +14,11 @@ int main()
 		return (-1);
 	}
 
+	//printf("%s", "qwe\n");
+	//printf("%s", get_next_line(fd));
+	//get_next_line(fd);
 	printf("%s", get_next_line(fd));
-
+	printf("%s", get_next_line(fd));
+	printf("%s\n", get_next_line(fd));
 	return (0);
 }

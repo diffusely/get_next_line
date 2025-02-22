@@ -6,7 +6,7 @@
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 21:13:15 by noavetis          #+#    #+#             */
-/*   Updated: 2025/02/13 17:03:48 by noavetis         ###   ########.fr       */
+/*   Updated: 2025/02/23 00:52:25 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,13 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100
+#  define BUFFER_SIZE 1000
 # endif
 
 char	*get_next_line(int fd);
-char	*ft_strjoin(const char *s1, const char *s2);
-int		get_next_line_utils(char buffer[BUFFER_SIZE + 1]);
-char	*ft_strdup(const char *src);
-char	*ft_alloc_end(const char *src ,int size);
-size_t	ft_strlen(const char *str);
+char	*ft_strjoin(char *s1, const char *buffer, int flag, int join);
+size_t	strlen_check(const char *buffer, int flag);
 
 #endif
