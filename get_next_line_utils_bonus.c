@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/12 21:15:43 by noavetis          #+#    #+#             */
-/*   Updated: 2025/02/24 20:41:01 by noavetis         ###   ########.fr       */
+/*   Created: 2025/02/24 20:44:14 by noavetis          #+#    #+#             */
+/*   Updated: 2025/02/24 22:15:11 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_strjoin(char *s1, const char *s2, size_t size, int join)
 {

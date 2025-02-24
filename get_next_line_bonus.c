@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: noavetis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/12 21:12:55 by noavetis          #+#    #+#             */
-/*   Updated: 2025/02/24 22:12:25 by noavetis         ###   ########.fr       */
+/*   Created: 2025/02/24 20:43:47 by noavetis          #+#    #+#             */
+/*   Updated: 2025/02/24 21:55:46 by noavetis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static int	gnl_check( char **result, char **ptr)
 {
@@ -58,14 +58,14 @@ static int	gnl_ptr_check(char **res, char **ptr,
 
 char	*get_next_line(int fd)
 {
-	static char		*ptr = NULL;
+	static char		*ptr[OPEN_MAX] = {NULL};
 	ssize_t			read_size;
 	char			buffer[BUFFER_SIZE + 1];
 	char			*result;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (gnl_check(&result, &ptr))
+	if (gnl_check(&result, &ptr[fd]))
 		return (result);
 	read_size = read(fd, buffer, BUFFER_SIZE);
 	if (read_size < 0)
@@ -73,7 +73,7 @@ char	*get_next_line(int fd)
 	while (read_size > 0)
 	{
 		buffer[read_size] = '\0';
-		if (gnl_ptr_check(&result, &ptr, buffer, read_size))
+		if (gnl_ptr_check(&result, &ptr[fd], buffer, read_size))
 			return (result);
 		read_size = read(fd, buffer, BUFFER_SIZE);
 	}
